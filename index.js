@@ -16,15 +16,21 @@ app.get('/', (req, res) => {
 
 var users = [];
 var connections = [];
+var online=0;
 
 // Socket.IO server side connection
 io.on('connection', (socket) => {
     connections.push(socket);
-    console.log("On");
+    online ++;
+    console.log("On", online);
+
+    io.sockets.emit('onu', online); // Отправляем количество онлайн пользователей клиенту
 
     socket.on('disconnect', (data) => {
         connections.splice(connections.indexOf(socket), 1);
-        console.log("Off");
+        online --;
+        console.log("Off", online);
+        io.sockets.emit('onu', online); // Отправляем обновленное количество онлайн пользователей
     });
 
     socket.on('send mess', (data) => {

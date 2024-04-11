@@ -12,6 +12,7 @@
         <div class="py-5 text-center">
             <h2>Чат</h2>
             <p class="lead">Ведите сообщение</p>
+            <p class="lead" id="oni">Онлайн людей в чате: 0</p>
         </div>
         <div class="row">
             <div class="col-6">
@@ -40,6 +41,7 @@
             var $textarea = $('#message');
             var $name = $('#name');
             var $all_messages = $('#all_mess');
+            var $oni = $('#oni');
 
             $form.submit(function(event){
                 event.preventDefault();
@@ -53,6 +55,9 @@
                 $all_messages.append("<div class='alert alert-success'><b>"+ data.name+ ": " +"</b>" + data.msg +"</div>"); // Обратите внимание на замену data.mess на data.msg
             });
 
+            socket.on('onu', (data)=>{
+                $oni.text("Онлайн людей в чате: " + data);
+            });
 
        });
     </script>
