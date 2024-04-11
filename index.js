@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/chatm1', (req, res)=>{
+    res.sendFile(__dirname + '/index1.html');
+});
+
 var users = [];
 var connections = [];
 var online=0;
