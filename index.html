@@ -8,8 +8,7 @@
     <style>
         body {
             background-color: blueviolet;
-            height: 90vh;
-            width: 197vh;
+            
         }
        .cbt {
             display: flex;
@@ -77,20 +76,25 @@
             var $name = $('#name');
             var $all_messages = $('#all_mess');
             var $oni = $('#oni');
-            const now = new Date();
-            let hours = now.getHours();
-            let minutes = now.getMinutes();
-
-            // Добавляем нуль перед числами меньше 10
-            hours = hours < 10 ? '0' + hours : hours;
-            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var hours, minutes; // Определение переменных в глобальной области видимости
 
             $form.submit(function(event){
                 event.preventDefault();
-                socket.emit('send mess', {mess: $textarea.val(), name: $name.val()});
+                const now = new Date(); // Получаем текущее время
+                hours = now.getHours(); // Получаем часы
+                minutes = now.getMinutes(); // Получаем минуты
+                hours = hours < 10 ? '0' + hours : hours; // Добавляем ноль перед часами, если это нужно
+                minutes = minutes < 10 ? '0' + minutes : minutes; // Добавляем ноль перед минутами, если это нужно
 
+                socket.emit('send mess', {
+                    mess: $textarea.val(), 
+                    name: $name.val(), 
+                    hours: hours, 
+                    minutes: minutes
+                });
                 $textarea.val('');
             });
+
 
             socket.on('add mess', (data)=>{
                 console.log("Received message on client:", data);
@@ -101,7 +105,8 @@
                 $oni.text("Онлайн людей в чате: " + data);
             });
 
-       });
+        });
+
     </script>
 </body>
 </html>
