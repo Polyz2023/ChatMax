@@ -35,6 +35,7 @@
 
             <div class="container text-center mt-3" style="background-color: rgb(26, 26, 26);">
                 <h2>Чат</h2>
+                <h6>v2.1.2</h6>
                 <p class="lead" id="oni">Онлайн людей в чате: 0</p>
             </div>
 
@@ -52,14 +53,14 @@
                 <form id="messForm">
                     <div class="form-group">
                         <label for="name">Имя</label>
-                        <input type="text" id="name" name="name" class="form-control" style="background-color: rgb(60, 60, 60);">
+                        <input type="text" id="name"name="name" class="form-control" style="color:white;background-color: rgb(60, 60, 60);">
                     </div>
                     <div class="form-group">
                         <label for="message">Сообщение</label>
-                        <textarea name="message" id="message" class="form-control" style="background-color: rgb(60, 60, 60);"s></textarea>
+                        <textarea name="message" id="message"class="form-control" style="color:white;background-color: rgb(60, 60, 60);"s></textarea>
                     </div>
                     <input type="submit" value="Отправить" class="btn btn-danger">
-                    <a type="button" href="/chatm1" class="btn btn-info">Сменить дизайн</a>
+                    <a type="button" href="/chatm1" class="btn btn-info">Сменить версию чата (не рекомендовано)</a>
                 </form>
             </div>
 
@@ -76,29 +77,52 @@
             var $name = $('#name');
             var $all_messages = $('#all_mess');
             var $oni = $('#oni');
-            var hours, minutes; // Определение переменных в глобальной области видимости
+            let hours;
+            let minutes;// Определение переменных в глобальной области видимости
 
             $form.submit(function(event){
-                event.preventDefault();
-                const now = new Date(); // Получаем текущее время
-                hours = now.getHours(); // Получаем часы
-                minutes = now.getMinutes(); // Получаем минуты
-                hours = hours < 10 ? '0' + hours : hours; // Добавляем ноль перед часами, если это нужно
-                minutes = minutes < 10 ? '0' + minutes : minutes; // Добавляем ноль перед минутами, если это нужно
+                
+                    event.preventDefault();
+                    const now = new Date(); // Получаем текущее время
+                    hours = now.getHours(); // Получаем часы
+                    minutes = now.getMinutes(); // Получаем минуты
+                    hours = hours < 10 ? '0' + hours : hours; // Добавляем ноль перед часами, если это нужно
+                    minutes = minutes < 10 ? '0' + minutes : minutes; // Добавляем ноль перед минутами, если это нужно
 
-                socket.emit('send mess', {
-                    mess: $textarea.val(), 
-                    name: $name.val(), 
-                    hours: hours, 
-                    minutes: minutes
-                });
-                $textarea.val('');
+                    socket.emit('send mess', {
+                        mess: $textarea.val(), 
+                        name: $name.val(), 
+                        hours: hours, 
+                        minutes: minutes
+                    });
+                      $textarea.val('');
+                
             });
 
+            $(document).keydown(function(event){
+        // Проверяем, нажата ли клавиша Enter (код клавиши 13) и активен ли элемент с id "message"
+                if (event.keyCode === 13 && event.target.id === 'message') {
+                    event.preventDefault();
+                    const now = new Date(); // Получаем текущее время
+                    hours = now.getHours(); // Получаем часы
+                    minutes = now.getMinutes(); // Получаем минуты
+                    hours = hours < 10 ? '0' + hours : hours; // Добавляем ноль перед часами, если это нужно
+                    minutes = minutes < 10 ? '0' + minutes : minutes; // Добавляем ноль перед минутами, если это нужно
+
+                    socket.emit('send mess', {
+                        mess: $textarea.val(), 
+                        name: $name.val(), 
+                        hours: hours, 
+                        minutes: minutes
+                    });
+                    $textarea.val('');
+                }
+            });
 
             socket.on('add mess', (data)=>{
                 console.log("Received message on client:", data);
                 $all_messages.append("<div class='alert alert-dark'><b>"+ data.name+ "(" + hours+ ":"+ minutes +")" +": " +"</b>" + data.msg +"</div>");
+                $all_messages.scrollTop($all_messages[0].scrollHeight);
             });
 
             socket.on('onu', (data)=>{
