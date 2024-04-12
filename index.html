@@ -21,29 +21,16 @@
             background-color: rgb(33, 33, 33);
             border-radius: 0% 0% 1% 1%;
             color: aliceblue;
-            width: 100%; /* Добавьте этот стиль, чтобы контейнер занимал всю доступную ширину */
+           /* Добавьте этот стиль, чтобы контейнер занимал всю доступную ширину */
             max-width: none;
-            height: 100%;
+           
         }
         #all_mess {
             max-height: 320px;
             overflow-y: auto;   
-            width: 50vh;
+           
         }
-        .alert {
-            width: 100%; /* Занимать всю доступную ширину */
-            word-wrap: break-word; /* Разрывать длинные слова, чтобы они не выходили за пределы блока */
-        }
-        .ai {
-            max-width: 100%;
-            max-height: 100%; /* Добавим это свойство */
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            object-fit: contain;
-        }
-
-
+       
 
         #k{
             background-color: rgba(67, 67, 236, 0.522);
@@ -53,6 +40,8 @@
             
             background-color: lightblue;
             color: black;
+
+           
         }
 
     </style>
@@ -64,13 +53,13 @@
 
             <div class="container text-center mt-3" style="background-color: rgb(25, 26, 26);">
                 <h2>Чат</h2>
-                <h6>v2.3.0</h6>
+                <h6>v2.3.5</h6>
                 <p class="lead" id="oni">Онлайн людей в чате: 0</p>
             </div>
 
             <div class="container" style="height: 400px;">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-6 w-100">
                         <h3>Сообщения</h3>
                         <div id="all_mess"></div>
                     </div>
