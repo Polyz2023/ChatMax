@@ -20,12 +20,40 @@
             background-color: rgb(33, 33, 33);
             border-radius: 0% 0% 1% 1%;
             color: aliceblue;
+            width: 100%; /* Добавьте этот стиль, чтобы контейнер занимал всю доступную ширину */
+            max-width: none;
+            height: 100%;
         }
         #all_mess {
             max-height: 320px;
-            overflow-y: auto;
-           
+            overflow-y: auto;   
+            width: 50vh;
         }
+        .alert {
+            width: 100%; /* Занимать всю доступную ширину */
+            word-wrap: break-word; /* Разрывать длинные слова, чтобы они не выходили за пределы блока */
+        }
+        .ai {
+            max-width: 100%;
+            max-height: 100%; /* Добавим это свойство */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+
+
+
+        #k{
+            background-color: rgba(67, 67, 236, 0.522);
+        }
+
+        .my-message {
+            
+            background-color: lightblue;
+            color: black;
+        }
+
     </style>
 </head>
 <body>
@@ -162,13 +190,23 @@
                 minutes = minutes < 10 ? '0' + minutes : minutes; // Добавляем ноль перед минутами, если это нужно
                 
                 // Отображаем обычные сообщения
-                $all_messages.append("<div onclick='otvet(this)' class='alert alert-dark'><b>"+ data.name+ " (" + hours + ":" + minutes + "): " +"</b>" + data.msg +"</div>");
-                
+                if (data.name === $name.val()) {
+        // Если сообщение от текущего пользователя, добавляем класс "my-message"
+                    $all_messages.append("<div onclick='otvet(this)' style='width:100%' class='alert alert-dark my-message'><b>"+ data.name+ " (" + hours + ":" + minutes + "): " +"</b>" + data.msg +"</div>");
+                } else {
+                    // Если сообщение от другого пользователя, не добавляем класс
+                    $all_messages.append("<div onclick='otvet(this)' style='width:100%'  class='alert alert-dark'><b>"+ data.name+ " (" + hours + ":" + minutes + "): " +"</b>" + data.msg +"</div>");
+                }
+
                 $all_messages.scrollTop($all_messages[0].scrollHeight);
             });
 
             socket.on('adds mess', (data) => {
-                $all_messages.append(`<div onclick='otvet(this)' class='alert alert-dark'><i>Ответ → '${data.o}'→ </i><b>${data.name} (${data.hours}:${data.minutes}): ${data.msg}</b></div>`);
+                if(data.name===$name.val()){
+                    $all_messages.append(`<div onclick='otvet(this)' style='width:100%'  class='alert alert-dark  my-message' ><i>Ответ → '${data.o}'→ </i><b>${data.name} (${data.hours}:${data.minutes}): ${data.msg}</b></div>`);
+                } else{
+                    $all_messages.append(`<div onclick='otvet(this)' style='width:100%'  class='alert alert-dark' ><i>Ответ → '${data.o}'→ </i><b>${data.name} (${data.hours}:${data.minutes}): ${data.msg}</b></div>`);
+                }
                 $all_messages.scrollTop($all_messages[0].scrollHeight);
                 isOTVET = true;
                 document.getElementById('soob').innerText = "Сообщение";
@@ -193,7 +231,17 @@
 
             socket.on('add image', (data) => {
                 console.log("Received image on client:", data);
-                $all_messages.append(`<div class='alert alert-dark'><b>${data.name}(${hours}:${minutes}):</b> <img src="${data.image}" style="max-width:200px;"></div>`);
+                let now = new Date(); // Получаем текущее время
+                let hours = now.getHours(); // Получаем часы
+                let minutes = now.getMinutes(); // Получаем минуты
+                hours = hours < 10 ? '0' + hours : hours; // Добавляем ноль перед часами, если это нужно
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                if(data.name===$name.val()){
+                    $all_messages.append(`<div class='alert alert-dark  my-message'><b>${data.name}(${hours}:${minutes}):</b> <img src="${data.image}" class='ai' style="max-width:200px;"></div>`);
+                }
+                else{
+                    $all_messages.append(`<div class='alert alert-dark'><b>${data.name}(${hours}:${minutes}):</b> <img src="${data.image}" class='ai' style="max-width:200px;"></div>`);
+                }
                 $all_messages.scrollTop($all_messages[0].scrollHeight);
             });
 
