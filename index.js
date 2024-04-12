@@ -41,4 +41,21 @@ io.on('connection', (socket) => {
         console.log("Received message:", data); // Добавляем это для отладки
         io.sockets.emit('add mess', {msg: data.mess, name: data.name});
     });
+
+    socket.on('send image', (data) => {
+        console.log("Received image:", data); // Для отладки
+        io.sockets.emit('add image', data);
+    });
+
+    socket.on('sendo mess', (data) => {
+        console.log("Received message:", data); // Для отладки
+        io.sockets.emit('adds mess', {
+            msg: data.mess,
+            name: data.name,
+            hours: data.hours,
+            minutes: data.minutes,
+            o: data.o // Проверьте, что значение 'o' правильно передается
+        });
+    });
+    
 });
