@@ -1,0 +1,37 @@
+body {
+    background-color: rgb(68, 61, 73);
+    
+}
+
+.cbt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.container {
+    background-color: rgb(33, 33, 33);
+    border-radius: 0% 0% 1% 1%;
+    color: aliceblue;
+   /* Добавьте этот стиль, чтобы контейнер занимал всю доступную ширину */
+    max-width: none;
+   
+}
+#all_mess {
+    max-height: 320px;
+    overflow-y: auto;   
+   
+}
+
+
+#k{
+    background-color: rgba(67, 67, 236, 0.522);
+}
+
+.my-message {
+    
+    background-color: lightblue;
+    color: black;
+
+   
+}

@@ -4,23 +4,25 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io"); // Import the Server class from socket.io
 const io = new Server(server); // Initialize Socket.IO with the server
+const path=require('path');
+
+app.use(express.static('public'));
 
 server.listen(4007, () => {
   console.log('Server is running on http://localhost:4007');
 });
 
 app.get('/', (req, res) => {
-    // Make sure the path to your index.html is correct. If it's in the same directory, this will work.
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(path.join(__dirname, 'views', 'v2.html'));
 });
 
-app.get('/chatm1', (req, res)=>{
-    res.sendFile(__dirname + '/index1.html');
+app.get('/chatm1', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'v1.html'));
 });
 
 var users = [];
 var connections = [];
-var online=0;
+var online=0; 
 
 // Socket.IO server side connection
 io.on('connection', (socket) => {
