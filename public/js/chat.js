@@ -1,5 +1,5 @@
 var isOTVET=true;
-        var otsv="" ;
+var otsv="" ;
         function otvet(e) {
             console.log(e.textContent);
             var sob = document.getElementById('soob');
@@ -17,8 +17,15 @@ var isOTVET=true;
             var $all_messages = $('#all_mess');
             var $oni = $('#oni');
             var $file = $('#file');
+            var $fname = $("#fname");
             let hours;
             let minutes;// Определение переменных в глобальной области видимост
+
+            $fname.submit(function(ev){
+                ev.preventDefault();
+                document.getElementById("main").style.display="block";
+                document.getElementById("login").style.display="none";
+            });
 
             $form.submit(function(event) {
                 event.preventDefault();
