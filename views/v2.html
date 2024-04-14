@@ -12,12 +12,31 @@
 </head>
 <body>
 
-    <div class="conteiner">
+    <div id="login" class=" justify-content-center align-items-center" style="height: 100vh;display:flex;">
+        <div class="alert alert-dark d-flex justify-content-center align-items-center" style="height: 50vh;background-color: rgb(25, 26, 26); width: 50vh; height: 50vh;">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <div style="color: aliceblue; margin-bottom: 5vh;">
+                    <h2>Чат</h2>
+                    <h6>v2.4.0</h6>
+                </div>
+                <form id="fname" class="form-group">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <label for="name" style="color: aliceblue; font-size: 20px;">Имя</label>
+                        <input type="text" id="name" name="name" class="form-control mb-2" style="color:white;background-color: rgb(60, 60, 60);">
+                        <input type="submit" class="btn btn-warning" value="Войти">
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>    
+
+    <div class="conteiner" id="main" style="display: none;">
         <div class="d-flex justify-content-center align-items-center flex-column cbt ">
 
             <div class="container text-center mt-3" style="background-color: rgb(25, 26, 26);">
                 <h2>Чат</h2>
-                <h6>v2.3.6</h6>
+                <h6>v2.4.0</h6>
                 <p class="lead" id="oni">Онлайн людей в чате: 0</p>
             </div>
 
@@ -33,10 +52,10 @@
             <div class="container" style="background-color: rgb(26, 26, 26);">
                 <h3>Форма сообщений</h3>
                 <form id="messForm">
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label for="name">Имя</label>
                         <input type="text" id="name"name="name" class="form-control" style="color:white;background-color: rgb(60, 60, 60);">
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <label for="message" id="soob">Сообщение</label>
                         <textarea name="message" id="message"class="form-control" style="color:white;background-color: rgb(60, 60, 60);"s></textarea>
