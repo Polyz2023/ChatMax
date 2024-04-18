@@ -56,6 +56,8 @@ var otsv="" ;
                 $textarea.val('');
             });
 
+            
+
             $(document).keydown(function(event){
         // Проверяем, нажата ли клавиша Enter (код клавиши 13) и активен ли элемент с id "message"
                 if (event.keyCode === 13 && event.target.id === 'message') {
@@ -109,9 +111,9 @@ var otsv="" ;
 
             socket.on('adds mess', (data) => {
                 if(data.name===$name.val()){
-                    $all_messages.append(`<div onclick='otvet(this)' style='width:100%'  class='alert alert-dark  my-message' ><i>Ответ → '${data.o}'→ </i><b>${data.name} (${data.hours}:${data.minutes}): ${data.msg}</b></div>`);
+                    $all_messages.append(`<div><i >Ответ → '${data.o}' </i><div onclick='otvet(this)' style='width:100%'  class='alert alert-dark  my-message' ><b>${data.name} (${data.hours}:${data.minutes}): ${data.msg}</b></div></div>`);
                 } else{
-                    $all_messages.append(`<div onclick='otvet(this)' style='width:100%'  class='alert alert-dark' ><i>Ответ → '${data.o}'→ </i><b>${data.name} (${data.hours}:${data.minutes}): ${data.msg}</b></div>`);
+                    $all_messages.append(`<div ><i>Ответ → '${data.o}' </i><div onclick='otvet(this)' style='width:100%'  class='alert alert-dark' ><b>${data.name} (${data.hours}:${data.minutes}): ${data.msg}</b></div></div>`);
                 }
                 $all_messages.scrollTop($all_messages[0].scrollHeight);
                 isOTVET = true;
@@ -143,10 +145,10 @@ var otsv="" ;
                 hours = hours < 10 ? '0' + hours : hours; // Добавляем ноль перед часами, если это нужно
                 minutes = minutes < 10 ? '0' + minutes : minutes;
                 if(data.name===$name.val()){
-                    $all_messages.append(`<div class='alert alert-dark  my-message'><b>${data.name}(${hours}:${minutes}):</b> <img src="${data.image}" class='ai' style="max-width:200px;"></div>`);
+                    $all_messages.append(`<div class='alert alert-dark  my-message' onclick='otvet(this)'><b>${data.name}(${hours}:${minutes}):</b> <img src="${data.image}" class='ai' style="max-width:200px;"></div>`);
                 }
                 else{
-                    $all_messages.append(`<div class='alert alert-dark'><b>${data.name}(${hours}:${minutes}):</b> <img src="${data.image}" class='ai' style="max-width:200px;"></div>`);
+                    $all_messages.append(`<div class='alert alert-dark' onclick='otvet(this)'><b>${data.name}(${hours}:${minutes}):</b> <img src="${data.image}" class='ai' style="max-width:200px;"></div>`);
                 }
                 $all_messages.scrollTop($all_messages[0].scrollHeight);
             });

@@ -1,7 +1,9 @@
 body {
     background-color: rgb(68, 61, 73);
-    
+    color: aliceblue;
 }
+
+
 
 .cbt {
     display: flex;

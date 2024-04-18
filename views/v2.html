@@ -15,7 +15,7 @@
             <div class="d-flex flex-column justify-content-center align-items-center">
                 <div style="color: aliceblue; margin-bottom: 5vh;">
                     <h2>Чат</h2>
-                    <h6>v2.4.0</h6>
+                    <h6>v2.5.0</h6>
                 </div>
                 <form id="fname" class="form-group">
                     <div class="d-flex flex-column justify-content-center align-items-center">
@@ -34,7 +34,7 @@
 
             <div class="container text-center mt-3" style="background-color: rgb(25, 26, 26);">
                 <h2>Чат</h2>
-                <h6>v2.4.0</h6>
+                <h6>v2.5.0</h6>
                 <p class="lead" id="oni">Онлайн людей в чате: 0</p>
             </div>
 
@@ -59,12 +59,14 @@
                         <textarea name="message" id="message"class="form-control" style="color:white;background-color: rgb(60, 60, 60);"s></textarea>
                     </div>
                     <input type="submit" value="Отправить" class="btn btn-danger">
-                    <a type="button" href="/chatm1" class="btn btn-info">Сменить версию чата (не рекомендовано)</a>
-                    <input type="file" id="file" value="Загрузить фото" class="btn btn-warning">
+                    <a type="button" href="/news" class="btn btn-info" id="ne">Новости</a>
+                    <input type="file" id="file" value="Загрузить фото" class="btn btn-warning" style="width: 130px;">
+                    
                 </form>
             </div>
 
         </div>
+        
     </div>
 
     <script src="/socket.io/socket.io.js"></script>

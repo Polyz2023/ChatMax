@@ -20,6 +20,10 @@ app.get('/chatm1', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'v1.html'));
 });
 
+app.get('/news', (req, res)=>{
+    res.sendFile(path.join(__dirname, 'views', 'news.html'));
+});
+
 var users = [];
 var connections = [];
 var online=0; 
